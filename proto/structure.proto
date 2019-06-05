@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package communication;
+
+option go_package = "communicationpb";
+
+message communicationRequest{
+    string msg = 1;
+}
+//home/nikhil/go/src/grpcTrial/proto/structure.proto
+message communicationResponse{
+    string result = 1;
+}
+
+service ReplyService{
+    rpc greet (communicationRequest) returns (communicationResponse) {};
+}
