@@ -8,9 +8,9 @@ import (
 	"log"
 )
 
-func Start(port string){
+func Start(port string) {
 	cc, err := grpc.Dial(fmt.Sprintf("localhost:%v", port), grpc.WithInsecure())
-	if err != nil{
+	if err != nil {
 		log.Fatal(err)
 	}
 	defer cc.Close()
@@ -19,11 +19,14 @@ func Start(port string){
 	client := communicationpb.NewReplyServiceClient(cc)
 
 	fmt.Println("Unary Request")
-	var n string = "Nikhil Anand"
+	var n string
+	fmt.Print("Enter Name: ")
+	fmt.Scan(&n)
 
-	resGreet , err := client.Greet(ctx, &communicationpb.CommunicationRequest{
-		Msg : n,
+	resGreet, err := client.Greet(ctx, &communicationpb.CommunicationRequest{
+		Msg: n,
 	})
 
-	fmt.Println(resGreet)
+	finalMessage := resGreet
+	fmt.Println(finalMessage)
 }
